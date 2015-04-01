@@ -11,7 +11,7 @@
      * that follows a hash in the current window location.
      * So far, only known use is for access token authentication url callbacks.
      */
-    exports.parseHashToken = function () {
+    exports.getHashToken = function () {
         if (window.location.hash.indexOf('#') === 0) {
             return exports.parseQueryString(window.location.hash.substr(1));
         } else {
