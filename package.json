@@ -2,7 +2,7 @@
   "name": "hl-common-js",
   "version": "1.0.0",
   "description": "HoomanLogic Common Javascript Library",
-  "main": "gulpfile.js",\
+  "main": "gulpfile.js",
   "devDependencies": {
     "gulp": "^3.8.10",
     "gulp-util": "^3.0.2",
