@@ -1,6 +1,6 @@
 /**
  * HoomanLogic Common Library
- * 2014, HoomanLogic, Geoff Manning
+ * 2015, HoomanLogic, Geoff Manning
  * Namespace: hl.common
  * Dependencies: jquery 1.11.1
  */
@@ -120,6 +120,22 @@ hl.common = (function (ns, $) {
             return parseQueryString(window.location.hash.substr(1));
         } else {
             return {};
+        }
+    };
+    
+    ns.saveLocal = function (location, result, secret) {
+        var value = JSON.stringify(result);
+        var encrypted = CryptoJS.AES.encrypt(value, secret);
+        $.jStorage.set(location, encrypted.toString() );
+    };
+    
+    ns.loadLocal = function (location, secret) {
+        var encrypted = $.jStorage.get(location);
+        try {
+            var decrypted = CryptoJS.AES.decrypt(encrypted, secret);
+            return JSON.parse(decrypted.toString(CryptoJS.enc.Utf8));
+        } catch (ex) {
+            return encrypted;
         }
     };
 

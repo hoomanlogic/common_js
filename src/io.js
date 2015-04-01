@@ -1,6 +1,6 @@
-﻿/**
+/**
  * HoomanLogic I/O Library
- * 2014, HoomanLogic, Geoff Manning
+ * 2015, HoomanLogic, Geoff Manning
  * Namespace: hl.io
  */
 var hl = hl || {};

@@ -1,6 +1,6 @@
-﻿ /**
+ /**
  * HoomanLogic DateTime Library
- * 2014, HoomanLogic, Geoff Manning
+ * 2015, HoomanLogic, Geoff Manning
  * Namespace: hl.datetime
  * Dependencies: jquery 1.11.1
  */
@@ -191,6 +191,17 @@ hl.datetime = (function (ns, $) {
         str = str.split('-');
         return new Date(parseInt(str[0]), parseInt(str[1]) - 1, parseInt(str[2]));
     };
+    
+    ns.parseLocalDate = function (str) {
+        var date = null;
+        if (Date.parse(str) === NaN) {
+            date = null;
+        } else {
+            date = new Date(Date.parse(str));
+            date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
+        }
+        return date;
+    }
 
     return ns;
 }(hl.datetime || {}, $));

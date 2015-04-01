@@ -1,6 +1,6 @@
 /**
  * HoomanLogic Extensions Library
- * 2014, HoomanLogic, Geoff Manning
+ * 2015, HoomanLogic, Geoff Manning
  */
 
 (function () {
