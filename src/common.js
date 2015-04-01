@@ -1,17 +1,13 @@
 /**
- * HoomanLogic Common Library
+ * hlcommon - Common Helpers
  * 2015, HoomanLogic, Geoff Manning
- * Namespace: hl.common
- * Dependencies: jquery 1.11.1
  */
-var hl = hl || {};
-var exports = module.exports = {};
-exports.hl = hl;
-
-hl.common = (function (ns, $) {
+(function (exports) {
     'use strict';
-
-    ns.getFriendlyName = function (propertyName) {
+    
+    var $ = require('jquery');
+    
+    exports.getFriendlyName = function (propertyName) {
 		var friendly = propertyName.charAt(0).toUpperCase();
 		for (var i = 1; i < propertyName.length; i++) {
 			if (propertyName.charAt(i).toUpperCase() === propertyName.charAt(i)) {
@@ -23,10 +19,10 @@ hl.common = (function (ns, $) {
 		return friendly;
     };
 
-    /*
+    /**
      * Returns true if undefined, null, 0, or a blank/whitespace string. Else returns false.
      */
-    ns.isBlank = function (obj) {
+    exports.isBlank = function (obj) {
         if (typeof obj === 'undefined' || obj === null || (typeof obj === 'string' && obj.trim().length === 0)) {
             return true;
         } else {
@@ -34,14 +30,14 @@ hl.common = (function (ns, $) {
         }
     };
     
-    /*
+    /**
      * Compares 'matchValue' to 'list[i][lookupByProp]' and returns 'list[i][returnProp]'.
      * If list or value is not set, returns a blank string.
      * If no match is found, returns 'value'.
      */
-    ns.lookup = function (returnProp, list, lookupByProp, matchValue) {
+    exports.lookup = function (returnProp, list, lookupByProp, matchValue) {
 
-        /*
+        /**
          * If list or value is not set, return a blank string.
          */
         if (typeof returnProp === 'undefined' || 
@@ -78,7 +74,7 @@ hl.common = (function (ns, $) {
      * Returns blank string if val is 0 or '0', else returns original value.
      * @param {Object} val - the value to modify to a blank string when 0 or '0'
      */
-    ns.zeroToBlank = function (val) {
+    exports.zeroToBlank = function (val) {
         if (val === 0) {
             return '';
         }
@@ -88,7 +84,10 @@ hl.common = (function (ns, $) {
         return val;
     };
 
-    ns.pluralize = function (noun, count) {
+    /**
+     * Pluralizes a word (US English) based on the count
+     */
+    exports.pluralize = function (noun, count) {
         if (count === 0) {
             return 'no ' + noun.plural();
         } else if (count === 1) {
@@ -97,17 +96,11 @@ hl.common = (function (ns, $) {
             return noun.plural();
         }
     };
-    
-    ns.store = function (namespace, data) { 
-        if (data) { 
-            return localStorage.setItem(namespace, JSON.stringify(data));
-        } 
 
-        var localStore = localStorage.getItem(namespace); 
-        return (localStore && JSON.parse(localStore)) || []; 
-    };
-
-    ns.assign = function (target, items) { 
+    /**
+     * Assigns properties of items to the target
+     */
+    exports.assign = function (target, items) { 
 
         items = [].slice.call(arguments, 1); 
 
@@ -117,9 +110,12 @@ hl.common = (function (ns, $) {
                 return target; 
             }, target); 
         }, target); 
-    }; 
+    };
 
-    ns.uuid = function () {
+    /**
+     * Returns a unique identifier
+     */
+    exports.uuid = function () {
         var i, random;
         var result = '';
 
@@ -135,60 +131,4 @@ hl.common = (function (ns, $) {
         return result;
     };
 
-    ns.getFragment = function getFragment() {
-        if (window.location.hash.indexOf("#") === 0) {
-            return parseQueryString(window.location.hash.substr(1));
-        } else {
-            return {};
-        }
-    };
-    
-    ns.saveLocal = function (location, result, secret) {
-        var value = JSON.stringify(result);
-        var encrypted = CryptoJS.AES.encrypt(value, secret);
-        $.jStorage.set(location, encrypted.toString() );
-    };
-    
-    ns.loadLocal = function (location, secret) {
-        var encrypted = $.jStorage.get(location);
-        try {
-            var decrypted = CryptoJS.AES.decrypt(encrypted, secret);
-            return JSON.parse(decrypted.toString(CryptoJS.enc.Utf8));
-        } catch (ex) {
-            return encrypted;
-        }
-    };
-
-    function parseQueryString(queryString) {
-        var data = {},
-            pairs, pair, separatorIndex, escapedKey, escapedValue, key, value;
-
-        if (queryString === null) {
-            return data;
-        }
-
-        pairs = queryString.split("&");
-
-        for (var i = 0; i < pairs.length; i++) {
-            pair = pairs[i];
-            separatorIndex = pair.indexOf("=");
-
-            if (separatorIndex === -1) {
-                escapedKey = pair;
-                escapedValue = null;
-            } else {
-                escapedKey = pair.substr(0, separatorIndex);
-                escapedValue = pair.substr(separatorIndex + 1);
-            }
-
-            key = decodeURIComponent(escapedKey);
-            value = decodeURIComponent(escapedValue);
-
-            data[key] = value;
-        }
-
-        return data;
-    }
-
-    return ns;
-}(hl.common || {}, $));
+}(typeof exports === 'undefined' ? this['hlcommon'] = {}: exports));

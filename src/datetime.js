@@ -1,17 +1,14 @@
- /**
- * HoomanLogic DateTime Library
+/**
+ * hldatetime - DateTime Helpers
  * 2015, HoomanLogic, Geoff Manning
- * Namespace: hl.datetime
- * Dependencies: jquery 1.11.1
  */
-var hl = hl || {};
-var exports = module.exports = {};
-exports.hl = hl;
-
-hl.datetime = (function (ns, $) {
+(function (exports) {
     'use strict';
-
-    ns.daysOfWeek = [
+    
+    var $ = require('jquery');
+    var hlcommon = require('./common.js');
+    
+    exports.daysOfWeek = [
         'Sunday',
         'Monday',
         'Tuesday',
@@ -21,7 +18,7 @@ hl.datetime = (function (ns, $) {
         'Saturday'
     ];
 
-    ns.monthsOfYear = [
+    exports.monthsOfYear = [
     'January',
     'February',
     'March',
@@ -36,7 +33,7 @@ hl.datetime = (function (ns, $) {
     'December'
     ];
 
-    ns.dateOnly = function (datetime) {
+    exports.dateOnly = function (datetime) {
         if (typeof datetime === 'undefined') {
             return '';
         }
@@ -52,7 +49,7 @@ hl.datetime = (function (ns, $) {
      * @param {Date} d1 - a date for comparison
      * @param {Date} d2 - a date for comparison
      */
-    ns.dayDiff = function (d1, d2) {
+    exports.dayDiff = function (d1, d2) {
         var days = Math.abs(d1 - d2) / 86400000;
         return days;
     };
@@ -62,11 +59,11 @@ hl.datetime = (function (ns, $) {
      * @param {Date} d1 - a date for comparison
      * @param {Date} d2 - a date for comparison
      */
-    ns.hourDiff = function (d1, d2) {
+    exports.hourDiff = function (d1, d2) {
         return Math.abs(d1 - d2) / 36e5;
     };
 
-    ns.getDaysOfWeek = function (numOfDays, start) {
+    exports.getDaysOfWeek = function (numOfDays, start) {
         // build weekdays by starting at the index of the desired start of week (ie. 1 for Monday)
         // and going 7 days, resetting to 0(Sunday) when index passes 6(Saturday)
         var today = new Date().getMidnight();
@@ -97,7 +94,7 @@ hl.datetime = (function (ns, $) {
 
             result.push({
                 dayId: dayIndex,
-                day: ns.daysOfWeek[dayIndex],
+                day: daysOfWeek[dayIndex],
                 date: new Date(date.toString()),
                 className: className
             });
@@ -115,7 +112,7 @@ hl.datetime = (function (ns, $) {
         return result;
     };
     
-    ns.getAdjustedDay = function (day, weekStart) {
+    exports.getAdjustedDay = function (day, weekStart) {
         var adjDay = day - weekStart;
         if (adjDay < 0) {
             adjDay = 7 + adjDay;
@@ -123,7 +120,7 @@ hl.datetime = (function (ns, $) {
         return adjDay;
     };
 
-    ns.formatDay = function (time) {
+    exports.formatDay = function (time) {
         var days = [
             { key: 0, value: 'Sunday' },
             { key: 1, value: 'Monday' },
@@ -141,20 +138,20 @@ hl.datetime = (function (ns, $) {
     // Date object is milliseconds since 1/1/1970
     // However, time in forecast.io api is seconds since 1/1/1970
     // so we must convert to milliseconds before casting it as a date
-    ns.convertSecondsToMilli = function (seconds) {
+    exports.convertSecondsToMilli = function (seconds) {
         return seconds * 1000;
     };
 
-    ns.getDateFromSeconds = function (seconds) {
+    exports.getDateFromSeconds = function (seconds) {
         return new Date(seconds * 1000);
     };
 
     //#region Formatting
-    ns.formatTime = function (seconds) {
-        return ns.getDateFromSeconds(seconds).toLocaleTimeString();
+    exports.formatTime = function (seconds) {
+        return getDateFromSeconds(seconds).toLocaleTimeString();
     };
 
-    ns.formatDateTime = function (date) {
+    exports.formatDateTime = function (date) {
         var options = {
             weekday: "long", year: "numeric", month: "short",
             day: "numeric", hour: "numeric", minute: "2-digit"
@@ -163,7 +160,7 @@ hl.datetime = (function (ns, $) {
         return date.toLocaleTimeString("en-us", options); // ‎Friday‎, ‎Feb‎ ‎1‎, ‎2013‎ ‎6‎:‎00‎ ‎AM
     };
 
-    ns.formatTimeFromMinutes = function (minutes) {
+    exports.formatTimeFromMinutes = function (minutes) {
         var hours = 0;
         if (minutes < 60) {
             return '0:' + minutes;
@@ -176,25 +173,25 @@ hl.datetime = (function (ns, $) {
         }
     };
 
-    ns.formatDuration = function (minutes) {
+    exports.formatDuration = function (minutes) {
         if (minutes < 60) {
-            return minutes + ' ' + hl.common.pluralize('minute', minutes);
+            return minutes + ' ' + hlcommon.pluralize('minute', minutes);
         } else {
             var leftover = minutes % 60;
 
             var hours = (minutes - leftover) / 60;
 
-            return hours + ' ' + hl.common.pluralize('hour', hours) + ' and ' + leftover + ' ' + hl.common.pluralize('minute', leftover);
+            return hours + ' ' + hlcommon.pluralize('hour', hours) + ' and ' + leftover + ' ' + hlcommon.pluralize('minute', leftover);
         }
     };
     //#endregion
 
-    ns.getLocalDate = function (str) {
+    exports.getLocalDate = function (str) {
         str = str.split('-');
         return new Date(parseInt(str[0]), parseInt(str[1]) - 1, parseInt(str[2]));
     };
     
-    ns.parseLocalDate = function (str) {
+    exports.parseLocalDate = function (str) {
         var date = null;
         if (Date.parse(str) === NaN) {
             date = null;
@@ -205,5 +202,4 @@ hl.datetime = (function (ns, $) {
         return date;
     }
 
-    return ns;
-}(hl.datetime || {}, $));
+}(typeof exports === 'undefined' ? this['hldatetime'] = {}: exports));
