@@ -23,37 +23,55 @@ hl.common = (function (ns, $) {
 		return friendly;
     };
 
+    /*
+     * Returns true if undefined, null, 0, or a blank/whitespace string. Else returns false.
+     */
     ns.isBlank = function (obj) {
-        if (typeof obj === 'undefined' || obj === null || obj === 0) {
+        if (typeof obj === 'undefined' || obj === null || (typeof obj === 'string' && obj.trim().length === 0)) {
             return true;
         } else {
             return false;
         }
     };
     
-    ns.lookupDescription = function (model, propName, listName, listKeyName, listValueName) {
-        // this function compares model.propName 
-        // to list.key then returns list.value
+    /*
+     * Compares 'matchValue' to 'list[i][lookupByProp]' and returns 'list[i][returnProp]'.
+     * If list or value is not set, returns a blank string.
+     * If no match is found, returns 'value'.
+     */
+    ns.lookup = function (returnProp, list, lookupByProp, matchValue) {
 
-        // optional override of list's comparison property
-        if (typeof listKeyName === 'undefined') {
-            listKeyName = 'key';
+        /*
+         * If list or value is not set, return a blank string.
+         */
+        if (typeof returnProp === 'undefined' || 
+            returnProp === null || 
+            typeof returnProp !== 'string' ||
+            returnProp.trim().length === 0 ||
+            typeof list === 'undefined' || 
+            list === null ||
+            typeof lookupByProp === 'undefined' || 
+            lookupByProp === null ||
+            typeof lookupByProp !== 'string' ||
+            lookupByProp.trim().length === 0) {
+            
+            return matchValue;
         }
 
-        // optional override of list's description property
-        if (typeof listValueName === 'undefined') {
-            listValueName = 'value';
-        }
-
-        for (var i = 0; i < $scope[listName].length; i++) {
-            if ($scope[listName][i][listKeyName] === model[propName]) {
-                return $scope[listName][i][listValueName];
+        /*
+         * Find item in list and return value of returnProp
+         */
+        for (var i = 0; i < list.length; i++) {
+            if (list[i][lookupByProp] === matchValue) {
+                return list[i][returnProp];
             }
         }
 
-        // if we don't find it in the list, 
-        // just return the value we were using to compare
-        return model[propName];
+        /*
+         * No match found, return 'matchValue'. 
+         */
+        return matchValue;
+        
     };
     
     /**
@@ -64,7 +82,7 @@ hl.common = (function (ns, $) {
         if (val === 0) {
             return '';
         }
-        if (val === '0') {
+        if (typeof val === 'string' && val.trim() === '0') {
             return '';
         }
         return val;
