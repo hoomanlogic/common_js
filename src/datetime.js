@@ -5,6 +5,8 @@
  * Dependencies: jquery 1.11.1
  */
 var hl = hl || {};
+var exports = module.exports = {};
+exports.hl = hl;
 
 hl.datetime = (function (ns, $) {
     'use strict';

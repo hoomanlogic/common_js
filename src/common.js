@@ -5,20 +5,22 @@
  * Dependencies: jquery 1.11.1
  */
 var hl = hl || {};
+var exports = module.exports = {};
+exports.hl = hl;
 
 hl.common = (function (ns, $) {
     'use strict';
 
     ns.getFriendlyName = function (propertyName) {
-        // todo: split camel case
-        if (propertyName === 'TwoWord') {
-            return 'Two Word';
-        } else {
-
-
-
-            return propertyName.charAt(0).toUpperCase() + propertyName.slice(1);
-        }
+		var friendly = propertyName.charAt(0).toUpperCase();
+		for (var i = 1; i < propertyName.length; i++) {
+			if (propertyName.charAt(i).toUpperCase() === propertyName.charAt(i)) {
+				friendly += ' ' + propertyName.charAt(i);
+			} else {
+				friendly += propertyName.charAt(i);
+			}
+		}
+		return friendly;
     };
 
     ns.isBlank = function (obj) {

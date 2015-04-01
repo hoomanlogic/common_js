@@ -4,6 +4,8 @@
  * Namespace: hl.io
  */
 var hl = hl || {};
+var exports = module.exports = {};
+exports.hl = hl;
 
 hl.io = (function (ns) {
     'use strict';
