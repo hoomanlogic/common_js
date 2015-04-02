@@ -5,7 +5,9 @@
 (function (exports) {
     'use strict';
     
-    var $ = require('jquery');
+    if (typeof require !== 'undefined') {
+        var $ = require('jquery');
+    }
     
     exports.getFriendlyName = function (propertyName) {
 		var friendly = propertyName.charAt(0).toUpperCase();

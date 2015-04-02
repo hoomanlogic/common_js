@@ -5,8 +5,10 @@
 (function (exports) {
     'use strict';
     
-    var $ = require('jquery');
-    var hlcommon = require('./common.js');
+    if (typeof require !== 'undefined') {
+        var $ = require('jquery');
+        var hlcommon = require('./common.js');
+    }
     
     exports.daysOfWeek = [
         'Sunday',
