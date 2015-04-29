@@ -92,7 +92,8 @@
 
     //#region String Extensions
     String.prototype.plural = function () {
-        if (this[this.length - 1] === 'y') {
+        var vowels = ['a','e','i','o','u'];
+        if (this[this.length - 1] === 'y' && vowels.indexOf(this[this.length - 2].toLowerCase()) === -1) {
             return this.substring(0, this.length - 1) + 'ies';
         } else {
             return this + 's';

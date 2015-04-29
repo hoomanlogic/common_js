@@ -1,4 +1,6 @@
-var should = require('chai').should();
+var chai = require('chai');
+var expect = chai.expect;
+var should = chai.should();
 
 require('../src/extensions.js');
 
@@ -76,10 +78,13 @@ describe('hlcommon', function() {
             hlcommon.pluralize('error', 2).should.equal('errors');
         })
         
-        it('should pluralize nouns that end with \'y\' with \'ies\'', function() {
+        it('should pluralize nouns that end with a consanant and \'y\' with \'ies\'', function() {
             hlcommon.pluralize('fairy', 2).should.equal('fairies');
         })
-        
+              
+        it('should pluralize nouns that end with a vowel and \'y\' with \'s\'', function() {
+            hlcommon.pluralize('day', 2).should.equal('days');
+        })
     })
 })
 
@@ -91,6 +96,28 @@ describe('hldatetime', function() {
 
         it('should be an array', function() {
             hldatetime.daysOfWeek.should.be.a('Array')
+        })
+    })
+    
+    describe('dayDiff', function() {
+        it('should return number of days between two dates', function() {
+            var d1 = new Date();
+            var d2 = new Date();
+            d2.setDate(d2.getDate() + 31);
+            
+            hldatetime.dayDiff(d1, d2).should.equal(31);
+            hldatetime.dayDiff(d2, d1).should.equal(31);
+        })
+    })
+    
+    describe('hourDiff', function() {
+        it('should return number of hours between two dates', function() {
+            var d1 = new Date();
+            var d2 = new Date();
+            d2.setDate(d2.getDate() + 31);
+            
+            hldatetime.hourDiff(d1, d2).should.equal(31 * 24);
+            hldatetime.hourDiff(d2, d1).should.equal(31 * 24);
         })
     })
 })
