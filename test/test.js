@@ -87,37 +87,3 @@ describe('hlcommon', function() {
         })
     })
 })
-
-describe('hldatetime', function() {  
-    describe('daysOfWeek', function() {
-        it('should exist', function() {
-            should.exist(hldatetime.daysOfWeek)
-        })
-
-        it('should be an array', function() {
-            hldatetime.daysOfWeek.should.be.a('Array')
-        })
-    })
-    
-    describe('dayDiff', function() {
-        it('should return number of days between two dates', function() {
-            var d1 = new Date();
-            var d2 = new Date();
-            d2.setDate(d2.getDate() + 31);
-            
-            hldatetime.dayDiff(d1, d2).should.equal(31);
-            hldatetime.dayDiff(d2, d1).should.equal(31);
-        })
-    })
-    
-    describe('hourDiff', function() {
-        it('should return number of hours between two dates', function() {
-            var d1 = new Date();
-            var d2 = new Date();
-            d2.setDate(d2.getDate() + 31);
-            
-            hldatetime.hourDiff(d1, d2).should.equal(31 * 24);
-            hldatetime.hourDiff(d2, d1).should.equal(31 * 24);
-        })
-    })
-})
