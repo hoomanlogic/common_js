@@ -5,22 +5,20 @@
 	if (typeof exports === "object") {
 		// CommonJS
 		module.exports = exports = factory(
-            require('./common'),
             require('./io')
         );
 	}
 	else if (typeof define === "function" && define.amd) {
 		// AMD
 		define([
-            './common',
             './io'
         ], factory);
 	}
 	else {
 		// Global (browser)
-		root.hlstore = factory(root.hlcommon, root.hlio);
+		root.hlstore = factory(root.hlio);
 	}
-}(this, function (hlcommon, hlio) {
+}(this, function (hlio) {
     'use strict';
     
     var Store = function () {
@@ -44,7 +42,6 @@
                 this.subscribers[i](this.updates.value);
             }
         },
-        assign: hlcommon.assign, 
         loadLocal: hlio.loadLocal, 
         saveLocal: hlio.saveLocal
     };

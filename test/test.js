@@ -4,7 +4,6 @@ var should = chai.should();
 
 require('../src/extensions.js');
 
-var hldatetime = require('../src/datetime.js');
 var hlcommon = require('../src/common.js');
 
 describe('hlcommon', function() {  
@@ -84,6 +83,14 @@ describe('hlcommon', function() {
               
         it('should pluralize nouns that end with a vowel and \'y\' with \'s\'', function() {
             hlcommon.pluralize('day', 2).should.equal('days');
+        })
+    })
+
+    describe('object assign', function () {
+        it('should work', function() {
+            Object.assign({}, { foo: 0 }, null, { bar: 1 }, void 0, { foo: 4, wah: 1 }).foo.should.equal(4);
+            Object.assign({}, { foo: 0 }, { bar: 1 }, { foo: 4, wah: 1 }).wah.should.equal(1);
+            Object.assign({}, { foo: 0 }, { bar: 1 }, { foo: 4, wah: 1 }).bar.should.equal(1);
         })
     })
 })

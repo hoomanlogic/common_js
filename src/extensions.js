@@ -6,6 +6,24 @@
 (function () {
     'use strict';
 
+    //#region ES6 Polyfills
+    Object.assign = Object.assign || function (target, items) {
+        if (typeof target === 'undefined' || target === null) {
+            throw new TypeError('Object.assign cannot be called with null or undefined target');
+        }
+        target = Object(target);
+        
+        items = [].slice.call(arguments, 1); 
+
+        return items.reduce(function (target, item) { 
+            return Object.keys(Object(item)).reduce(function (target, property) { 
+                target[property] = item[property]; 
+                return target; 
+            }, target); 
+        }, target);
+    };
+    //#endregion
+
     //#region Array Extensions
     Array.prototype.contains = function (value, prop) {
         var i;
@@ -89,7 +107,7 @@
         return this.getFullYear() + '-' + month + '-' + date;
     };
     //#endregion
-
+    
     //#region String Extensions
     String.prototype.plural = function () {
         var vowels = ['a','e','i','o','u'];

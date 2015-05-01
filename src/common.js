@@ -113,21 +113,6 @@
         },
 
         /**
-         * Assigns properties of items to the target
-         */
-        assign: function (target, items) { 
-
-            items = [].slice.call(arguments, 1); 
-
-            return items.reduce(function (target, item) { 
-                return Object.keys(item).reduce(function (target, property) { 
-                    target[property] = item[property]; 
-                    return target; 
-                }, target); 
-            }, target); 
-        },
-
-        /**
          * Returns a unique identifier
          */
         uuid: function () {

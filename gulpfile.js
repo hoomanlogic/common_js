@@ -1,4 +1,4 @@
-﻿var gulp = require('gulp');
+var gulp = require('gulp');
 var plumber = require('gulp-plumber');
 var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
@@ -10,7 +10,7 @@ var onError = function (err) {
 };
 
 // TASK: Minify Javascript
-gulp.task('minify-js', function () {
+gulp.task('build', function () {
     return gulp.src(['src/*.js'])
 		.pipe(plumber({
 			errorHandler: onError
@@ -23,7 +23,7 @@ gulp.task('minify-js', function () {
 });
 
 gulp.task('watch', function () {
-	var jsWatcher = gulp.watch(['src/*.js'], ['minify-js']);
+	var jsWatcher = gulp.watch(['src/*.js'], ['build']);
 	jsWatcher.on('change', function (event) {
 		console.log('File ' + event.path + ' was ' + event.type + ', running task...');
 	});
