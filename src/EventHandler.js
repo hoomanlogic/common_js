@@ -1,5 +1,5 @@
 // CommonJS, AMD, and Global shim
-(function (root, factory) {
+(function (factory) {
     'use strict';
 	if (typeof exports === "object") {
 		// CommonJS
@@ -11,9 +11,9 @@
 	}
 	else {
 		// Global (browser)
-		root.EventHandler = factory(root.Rx);
+		window.EventHandler = factory(window.Rx);
 	}
-}(this, function (Rx) {
+}(function (Rx) {
     'use strict';
     
     return { 

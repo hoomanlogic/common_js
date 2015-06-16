@@ -3,7 +3,7 @@
  * 2015, HoomanLogic, Geoff Manning
  */
 // CommonJS, AMD, and Global shim
-(function (root, factory) {
+(function (factory) {
     'use strict';
 	if (typeof exports === "object") {
 		// CommonJS
@@ -15,9 +15,9 @@
 	}
 	else {
 		// Global (browser)
-		root.hlio = factory(root.CryptoJS.AES);
+		window.hlio = factory(window.CryptoJS.AES);
 	}
-}(this, function (AES) {
+}(function (AES) {
     'use strict';
 
     return {

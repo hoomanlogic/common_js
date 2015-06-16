@@ -1,5 +1,5 @@
 // CommonJS, AMD, and Global shim
-(function (root, factory) {
+(function (factory) {
     'use strict';
 
 	if (typeof exports === "object") {
@@ -16,9 +16,9 @@
 	}
 	else {
 		// Global (browser)
-		root.hlstore = factory(root.hlio);
+		window.hlstore = factory(window.hlio);
 	}
-}(this, function (hlio) {
+}(function (hlio) {
     'use strict';
     
     var Store = function () {
