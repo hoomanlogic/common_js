@@ -4,9 +4,11 @@
   "description": "HoomanLogic Common Javascript Library",
   "main": "gulpfile.js",
   "devDependencies": {
+    "eslint": "^1.0.0",
+    "babel-eslint": "^4.0.5",
     "chai": "^2.2.0",
-    "crypto-js": "^3.1.4",
     "gulp": "^3.8.10",
+    "gulp-eslint": "^1.0.0",
     "gulp-plumber": "^0.6.6",
     "gulp-rename": "^1.2.0",
     "gulp-uglify": "^1.0.2",

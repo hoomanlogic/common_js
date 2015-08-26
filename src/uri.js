@@ -49,8 +49,8 @@
         }
 
         return data;
-    }
-    
+    };
+
     return {
         /**
          * Returns an object with properties for each key in url query string
@@ -66,12 +66,12 @@
         },
 
         /**
-         * Returns an object with properties 
+         * Returns an object with properties
          * for each key in url query string.
-         * Ie. "maxresult=20&orderby=date" results 
+         * Ie. "maxresult=20&orderby=date" results
          * in {maxresults: '20', orderby: 'date'}
          */
         parseQueryString: parseQueryString
     };
-    
+
 }));

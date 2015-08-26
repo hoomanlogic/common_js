@@ -12,14 +12,14 @@
             throw new TypeError('Object.assign cannot be called with null or undefined target');
         }
         target = Object(target);
-        
-        items = [].slice.call(arguments, 1); 
 
-        return items.reduce(function (target, item) { 
-            return Object.keys(Object(item)).reduce(function (target, property) { 
-                target[property] = item[property]; 
-                return target; 
-            }, target); 
+        items = [].slice.call(arguments, 1);
+
+        return items.reduce(function (target, item) {
+            return Object.keys(Object(item)).reduce(function (target, property) {
+                target[property] = item[property];
+                return target;
+            }, target);
         }, target);
     };
     //#endregion
@@ -107,7 +107,7 @@
         return this.getFullYear() + '-' + month + '-' + date;
     };
     //#endregion
-    
+
     //#region String Extensions
     String.prototype.plural = function () {
         var vowels = ['a','e','i','o','u'];
@@ -116,7 +116,7 @@
         } else {
             return this + 's';
         }
-    }
+    };
     //#endregion
 
 })();

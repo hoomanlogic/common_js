@@ -20,12 +20,12 @@
 	}
 }(function (hlio) {
     'use strict';
-    
+
     var Store = function () {
         this.updates = { value: null };
         this.subscribers = [];
-    }
-    
+    };
+
     Store.prototype = {
         subscribe: function (callback) {
             this.subscribers.push(callback);
@@ -42,12 +42,12 @@
                 this.subscribers[i](this.updates.value);
             }
         },
-        loadLocal: hlio.loadLocal, 
+        loadLocal: hlio.loadLocal,
         saveLocal: hlio.saveLocal
     };
-    
+
     return {
         Store: Store
     };
-    
+
 }));
