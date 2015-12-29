@@ -1,25 +1,14 @@
 /**
- * hlio - I/O Helpers
+ * windio AKA helio AKA lio (local input output) - I/O Helpers
  * 2015, HoomanLogic, Geoff Manning
  */
-// CommonJS, AMD, and Global shim
 (function (factory) {
-    'use strict';
-	if (typeof exports === "object") {
-		// CommonJS
-		module.exports = exports = factory(require('crypto-js/aes'));
-	}
-	else if (typeof define === "function" && define.amd) {
-		// AMD
-		define(['./node_modules/crypto-js/aes.js'], factory);
-	}
-	else {
-		// Global (browser)
-		window.hlio = factory(window.CryptoJS.AES);
-	}
-}(function (AES) {
-    'use strict';
-
+    module.exports = exports = factory(
+        require('simplestorage.js'),
+        require('crypto-js/aes'),
+        require('crypto-js/enc-utf8')
+    );
+}(function (simpleStorage, AES, utf8) {
     return {
         getImage: function (msg) {
 
@@ -89,27 +78,25 @@
             };
         },
 
-        store: function (namespace, data) { 
-            if (data) { 
-                return localStorage.setItem(namespace, JSON.stringify(data));
-            } 
-
-            var localStore = localStorage.getItem(namespace); 
-            return (localStore && JSON.parse(localStore)) || []; 
-        },
-
-        saveLocal: function (location, result, secret) {
-            var value = JSON.stringify(result);
+        /**
+         * Save resource to local storage
+         */
+        saveLocal: function (location, resource, secret) {
+            var value = JSON.stringify(resource);
             var encrypted = AES.encrypt(value, secret);
-            $.jStorage.set(location, encrypted.toString() );
+            simpleStorage.set(location, encrypted.toString() );
         },
 
+        /**
+         * Retrieve resource from local storage
+         */
         loadLocal: function (location, secret) {
-            var encrypted = $.jStorage.get(location);
+            var encrypted = simpleStorage.get(location);
             try {
                 var decrypted = AES.decrypt(encrypted, secret);
-                return JSON.parse(decrypted.toString(CryptoJS.enc.Utf8));
-            } catch (ex) {
+                return JSON.parse(decrypted.toString(utf8));
+            }
+            catch (ex) {
                 return encrypted;
             }
         }
