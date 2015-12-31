@@ -4,7 +4,7 @@
  */
 (function (factory) {
     module.exports = exports = factory(
-        require('simplestorage.js'),
+        require('simplestorage.js/simpleStorage.js'),
         require('crypto-js/aes'),
         require('crypto-js/enc-utf8')
     );

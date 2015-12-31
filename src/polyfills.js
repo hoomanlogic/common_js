@@ -3,8 +3,6 @@
  * 2015, HoomanLogic, Geoff Manning
  */
 (function () {
-    'use strict';
-    
     Object.assign = Object.assign || function (target, items) {
         if (typeof target === 'undefined' || target === null) {
             throw new TypeError('Object.assign cannot be called with null or undefined target');

@@ -1,18 +1,5 @@
-// CommonJS, AMD, and Global shim
 (function (factory) {
-    'use strict';
-	if (typeof exports === "object") {
-		// CommonJS
-		module.exports = exports = factory(require('rx'));
-	}
-	else if (typeof define === "function" && define.amd) {
-		// AMD
-		define(['rx'], factory);
-	}
-	else {
-		// Global (browser)
-		window.EventHandler = factory(window.Rx);
-	}
+	module.exports = exports = factory(require('rx'));
 }(function (Rx) {
     'use strict';
     

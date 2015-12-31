@@ -2,23 +2,9 @@
  * hluri - URI Helpers
  * 2015, HoomanLogic, Geoff Manning
  */
-// CommonJS, AMD, and Global shim
 (function (factory) {
-    'use strict';
-	if (typeof exports === "object") {
-		// CommonJS
-		module.exports = exports = factory();
-	}
-	else if (typeof define === "function" && define.amd) {
-		// AMD
-		define([], factory);
-	}
-	else {
-		// Global (browser)
-		window.hluri = factory();
-	}
+	module.exports = exports = factory();
 }(function () {
-    'use strict';
 
     var parseQueryString = function (queryString) {
         var data = {},

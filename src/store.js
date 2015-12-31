@@ -1,25 +1,8 @@
-// CommonJS, AMD, and Global shim
 (function (factory) {
-    'use strict';
-
-	if (typeof exports === "object") {
-		// CommonJS
-		module.exports = exports = factory(
-            require('./io')
-        );
-	}
-	else if (typeof define === "function" && define.amd) {
-		// AMD
-		define([
-            './io'
-        ], factory);
-	}
-	else {
-		// Global (browser)
-		window.hlstore = factory(window.hlio);
-	}
+    module.exports = exports = factory(
+        require('./io')
+    );
 }(function (hlio) {
-    'use strict';
 
     var Store = function () {
         this.updates = { value: null };

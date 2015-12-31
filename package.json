@@ -2,28 +2,27 @@
   "name": "hl-common-js",
   "version": "1.0.0",
   "description": "HoomanLogic Common Javascript Library",
-  "main": "gulpfile.js",
+  "main": "test/test.js",
+  "dependencies": {
+    "crypto-js": "^3.1.4",
+    "simplestorage.js": "^0.2.0"
+  },
   "devDependencies": {
-    "eslint": "^1.0.0",
+    "babel-core": "^5.5.8",
     "babel-eslint": "^4.0.5",
+    "babel-loader": "5.3.2",
+    "eslint": "^1.0.0",
+    "eslint-loader": "^1.0.0",
+    "eslint-plugin-react": "^3.2.0",
     "chai": "^2.2.0",
-    "gulp": "^3.8.10",
-    "gulp-eslint": "^1.0.0",
-    "gulp-plumber": "^0.6.6",
-    "gulp-rename": "^1.2.0",
-    "gulp-uglify": "^1.0.2",
-    "gulp-util": "^3.0.2",
     "jquery": "^2.1.3",
     "mocha": "^2.2.1",
-    "rx": "^2.5.2"
+    "rx": "^2.5.2",
+    "webpack": "^1.12.9"
   },
   "scripts": {
     "test": "mocha test"
   },
   "author": "Geoff Manning, HoomanLogic",
-  "license": "ISC",
-  "dependencies": {
-    "crypto-js": "^3.1.4",
-    "simplestorage.js": "^0.2.0"
-  }
+  "license": "ISC"
 }

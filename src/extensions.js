@@ -2,10 +2,7 @@
  * HoomanLogic Extensions Library
  * 2015, HoomanLogic, Geoff Manning
  */
-
 (function () {
-    'use strict';
-
     //#region ES6 Polyfills
     Object.assign = Object.assign || function (target, items) {
         if (typeof target === 'undefined' || target === null) {
