@@ -6,7 +6,7 @@
     module.exports = exports = factory();
 }(function () {
     return {
-        
+
         getFriendlyName: function (propertyName) {
             var friendly = propertyName.charAt(0).toUpperCase();
             for (var i = 1; i < propertyName.length; i++) {
@@ -29,7 +29,7 @@
                 return false;
             }
         },
-    
+
         /**
          * Compares 'matchValue' to 'list[i][lookupByProp]' and returns 'list[i][returnProp]'.
          * If list or value is not set, returns a blank string.
@@ -40,13 +40,13 @@
             /**
              * If list or value is not set, return a blank string.
              */
-            if (typeof returnProp === 'undefined' || 
-                returnProp === null || 
+            if (typeof returnProp === 'undefined' ||
+                returnProp === null ||
                 typeof returnProp !== 'string' ||
                 returnProp.trim().length === 0 ||
-                typeof list === 'undefined' || 
+                typeof list === 'undefined' ||
                 list === null ||
-                typeof lookupByProp === 'undefined' || 
+                typeof lookupByProp === 'undefined' ||
                 lookupByProp === null ||
                 typeof lookupByProp !== 'string' ||
                 lookupByProp.trim().length === 0) {
@@ -64,7 +64,7 @@
             }
 
             /*
-             * No match found, return 'matchValue'. 
+             * No match found, return 'matchValue'.
              */
             return matchValue;
 
@@ -90,9 +90,11 @@
         pluralize: function (noun, count) {
             if (count === 0) {
                 return 'no ' + noun.plural();
-            } else if (count === 1) {
+            }
+            else if (count === 1) {
                 return noun;
-            } else {
+            }
+            else {
                 return noun.plural();
             }
         },

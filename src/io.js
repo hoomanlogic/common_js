@@ -2,6 +2,7 @@
  * windio AKA helio AKA lio (local input output) - I/O Helpers
  * 2015, HoomanLogic, Geoff Manning
  */
+/* globals FileReader window */
 (function (factory) {
     module.exports = exports = factory(
         require('simplestorage.js/simpleStorage.js'),
@@ -9,6 +10,7 @@
         require('crypto-js/enc-utf8')
     );
 }(function (simpleStorage, AES, utf8) {
+
     return {
         getImage: function (msg) {
 
@@ -54,7 +56,8 @@
                 (window.URL || window.webkitURL).revokeObjectURL(save.href);
 
                 // for IE
-            } else if (!!window.ActiveXObject && document.execCommand) {
+            }
+            else if (!!window.ActiveXObject && document.execCommand) {
                 var _window = window.open(fileURL, '_blank');
                 _window.document.close();
                 _window.document.execCommand('SaveAs', true, fileName || fileURL);
