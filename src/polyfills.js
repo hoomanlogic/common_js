@@ -8,15 +8,15 @@
             throw new TypeError('Object.assign cannot be called with null or undefined target');
         }
         target = Object(target);
-        
-        items = [].slice.call(arguments, 1); 
 
-        return items.reduce(function (target, item) { 
-            return Object.keys(Object(item)).reduce(function (target, property) { 
-                target[property] = item[property]; 
-                return target; 
-            }, target); 
+        items = [].slice.call(arguments, 1);
+
+        return items.reduce(function (target, item) {
+            return Object.keys(Object(item)).reduce(function (target, property) {
+                target[property] = item[property];
+                return target;
+            }, target);
         }, target);
     };
-    
+
 })();

@@ -12,7 +12,8 @@
             for (var i = 1; i < propertyName.length; i++) {
                 if (propertyName.charAt(i).toUpperCase() === propertyName.charAt(i)) {
                     friendly += ' ' + propertyName.charAt(i);
-                } else {
+                }
+                else {
                     friendly += propertyName.charAt(i);
                 }
             }
@@ -25,7 +26,8 @@
         isBlank: function (obj) {
             if (typeof obj === 'undefined' || obj === null || (typeof obj === 'string' && obj.trim().length === 0)) {
                 return true;
-            } else {
+            }
+            else {
                 return false;
             }
         },
@@ -69,7 +71,7 @@
             return matchValue;
 
         },
-    
+
         /**
          * Returns blank string if val is 0 or '0', else returns original value.
          * @param {Object} val - the value to modify to a blank string when 0 or '0'

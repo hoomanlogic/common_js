@@ -185,7 +185,7 @@
     var last = function (num) {
         return extend(this.slice(-(num)));
     };
-    
+
     var copy = function () {
         // TODO: is one method faster than the other
         return this.slice();
@@ -211,7 +211,7 @@
         }
         return result;
     };
-    
+
     var order = function (prop) {
 
         this.sort(function (a, b) {
