@@ -279,6 +279,9 @@
                     isLike = false;
                 }
             }
+            else if (typeof matchObj === 'function') {
+                isLike = matchObj(this[i]);
+            }
             else {
                 for (var matchProp in matchObj) {
                     if (matchObj.hasOwnProperty(matchProp)) {
@@ -333,6 +336,9 @@
                 if (this[i] !== matchObj) {
                     isLike = false;
                 }
+            }
+            else if (typeof matchObj === 'function') {
+                isLike = matchObj(this[i]);
             }
             else {
                 for (var matchProp in matchObj) { // eslint-disable-line one-var
